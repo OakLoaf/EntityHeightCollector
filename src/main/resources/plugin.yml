@@ -1,0 +1,5 @@
+name: EntityHeightCollector
+version: '${version}'
+main: org.lushplugins.entityheightcollector.EntityHeightCollector
+api-version: '1.17'
+load: POSTWORLD
