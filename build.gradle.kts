@@ -1,6 +1,7 @@
 plugins {
     `java-library`
     id("io.github.goooler.shadow") version("8.1.7")
+    id("xyz.jpenilla.run-paper") version("2.3.0")
 }
 
 
@@ -32,6 +33,10 @@ java {
 tasks {
     withType<JavaCompile> {
         options.encoding = "UTF-8"
+    }
+
+    runServer {
+        minecraftVersion("1.21")
     }
 
     shadowJar {
