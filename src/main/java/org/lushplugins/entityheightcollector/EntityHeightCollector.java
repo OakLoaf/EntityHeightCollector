@@ -45,12 +45,22 @@ public final class EntityHeightCollector extends JavaPlugin {
             for (int i = 0; i < ENTITY_TYPES_PER_TICK; i++) {
                 EntityType entityType = entityTypes.pop();
                 String key = entityType.getKey().toString();
-                Entity entity = world.spawnEntity(location, entityType);
+
+                Entity entity;
+                try {
+                    entity = world.spawnEntity(location, entityType);
+                } catch (IllegalArgumentException e) {
+                    getLogger().severe("Failed to spawn entity of type '" + key + "' when gathering data");
+                    continue;
+                }
+
                 data.set(key + ".height", entity.getHeight());
 
                 if (entity instanceof LivingEntity livingEntity) {
                     data.set(key + ".eye-height", livingEntity.getEyeHeight());
                 }
+
+                entity.remove();
             }
         }, 1, 1);
     }
